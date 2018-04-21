@@ -5,13 +5,6 @@
     "version": "1.0.0",
     "main": "index.js",
     "dependencies": {
-        "request": "*",
-        "grunt": "*",
-        "grunt-sass": "*",
-        "autoprefixer": "*",
-        "cssnano": "*",
-        "grunt-browser-sync": "*",
-        "grunt-contrib-watch": "*",
-        "grunt-postcss": "*"
+        "request": "*"
     }
 }
