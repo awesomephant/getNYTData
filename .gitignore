@@ -1,0 +1,8 @@
+node_modules/
+.ipynb_checkpoints/
+articles-full.json
+articles.json
+package-lock.json
+nyt.txt
+vocabulary.txt
+vocabulary_letters.txt
