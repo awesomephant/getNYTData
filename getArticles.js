@@ -4,6 +4,16 @@ const fs = require('fs');
 const API_KEY = '352679b316324a1c87e69efa474535d0';
 
 var months = [
+    [2015, 1],
+    [2015, 2],
+    [2015, 3],
+    [2015, 4],
+    [2015, 5],
+    [2015, 6],
+    [2015, 7],
+    [2015, 8],
+    [2015, 9],
+    [2015, 10],
     [2015, 11],
     [2015, 12],
     [2016, 1],
@@ -48,16 +58,27 @@ function callback(error, response, body) {
             let doc = info.docs[i];
             let newDoc = {
                 headline: doc.headline.main,
-                //printHeadline: doc.headline.print_headline,
-                //byline: doc.byline.original,
+            }
+            if (doc.byline){
+                newDoc.byline = doc.byline.original
+            }
+            if (doc.abstract){
+                newDoc.abstract = doc.abstract
+            }
+            for (let i = 0; i < doc.keywords.length; i++){
+                let kw = doc.keywords[i];
+                if (kw.name === 'glocations'){
+                    newDoc.location = kw.value;
+                    break;
+                }
             }
             newDocs.push(newDoc)
         };
         month.date = months[currentMonth];
-        month.hits = newDocs.length;
+        month.count = newDocs.length;
         month.docs = newDocs;
         data.push(month)
-        fs.writeFileSync('articles.json', JSON.stringify(data, null, ''))
+        fs.writeFileSync('./data/articles.json', JSON.stringify(data, null, ''))
         if (currentMonth < months.length - 1) {
             currentMonth++;
             doRequest();
